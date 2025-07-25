@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamWire - Generador de Apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .generator-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>🚀 DreamWire - Generador</h1>
+        <a href="/dashboard" class="back-btn">← Volver al Dashboard</a>
+    </nav>
+
+    <div class="container">
+        <div class="generator-card">
+            <h2>🎯 Describe tu idea de aplicación</h2>
+            <p style="color: #666; margin-bottom: 2rem;">Cuéntanos qué quieres crear y nosotros generaremos el código</p>
+            
+            <form id="generatorForm">
+                <div class="form-group">
+                    <label for="projectName">Nombre del Proyecto:</label>
+                    <input type="text" id="projectName" name="projectName" placeholder="ej: YogaBooking" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="idea">Describe tu idea:</label>
+                    <textarea id="idea" name="idea" placeholder="ej: Quiero una app para reservar clases de yoga donde los usuarios puedan ver horarios, reservar clases y los instructores puedan gestionar sus horarios" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Características adicionales:</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="auth" name="features" value="authentication">
+                            <label for="auth">🔐 Autenticación</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="crud" name="features" value="crud">
+                            <label for="crud">📝 CRUD Básico</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="api" name="features" value="api">
+                            <label for="api">🔗 API REST</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="frontend" name="features" value="frontend">
+                            <label for="frontend">⚛️ Frontend React</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="generate-btn">🚀 Generar Aplicación</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generatorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = this.querySelector('.generate-btn');
+            btn.textContent = '⏳ Generando...';
+            btn.disabled = true;
+            
+            // Aquí irá la lógica para llamar a tu API
+            setTimeout(() => {
+                alert('🎉 ¡Aplicación generada! (Funcionalidad en desarrollo)');
+                btn.textContent = '🚀 Generar Aplicación';
+                btn.disabled = false;
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

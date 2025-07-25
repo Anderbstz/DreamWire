@@ -20,4 +20,17 @@ public class WebController {
     public String dashboard() {
         return "dashboard"; // busca templates/dashboard.html
     }
+    @GetMapping("/generator")
+    public String generator() {
+        return "generator"; // busca templates/generator.html
+    }
+    @GetMapping("/project-preview")
+    public String projectPreview() {
+        return "project-preview";
+    }
+    
+    @GetMapping("/project-history")
+    public String projectHistory() {
+        return "project-history";
+    }
 }

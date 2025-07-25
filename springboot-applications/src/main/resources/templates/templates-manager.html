@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamWire - Gestor de Plantillas</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header { background: white; border-radius: 10px; padding: 30px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .templates-layout { display: grid; grid-template-columns: 300px 1fr; gap: 30px; }
+        .sidebar { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); height: fit-content; }
+        .main-content { background: white; border-radius: 10px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .category { margin-bottom: 20px; }
+        .category h3 { color: #495057; margin-bottom: 10px; font-size: 1rem; text-transform: uppercase; }
+        .category-item { display: block; padding: 10px 15px; color: #6c757d; text-decoration: none; border-radius: 8px; margin-bottom: 5px; transition: all 0.3s ease; }
+        .category-item:hover, .category-item.active { background: #e9ecef; color: #495057; }
+        .templates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .template-card { border: 2px solid #e9ecef; border-radius: 10px; padding: 20px; transition: all 0.3s ease; }
+        .template-card:hover { border-color: #667eea; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .template-header { display: flex; justify-content: between; align-items: center; margin-bottom: 15px; }
+        .template-title { font-size: 1.2rem; font-weight: bold; color: #2c3e50; }
+        .template-type { background: #667eea; color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; }
+        .template-description { color: #6c757d; line-height: 1.6; margin-bottom: 15px; }
+        .template-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: #6c757d; margin-bottom: 15px; }
+        .template-actions { display: flex; gap: 10px; }
+        .btn { padding: 8px 15px; border: none; border-radius: 5px; text-decoration: none; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn:hover { transform: scale(1.05); }
+        .code-preview { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 5px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9rem; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>📋 Gestor de Plantillas</h1>
+                <p>Administra las plantillas de código para la generación de proyectos</p>
+            </div>
+            <a href="#" class="btn btn-primary" style="padding: 12px 25px;">➕ Nueva Plantilla</a>
+        </div>
+
+        <div class="templates-layout">
+            <div class="sidebar">
+                <div class="category">
+                    <h3>🏗️ Backend</h3>
+                    <a href="#" class="category-item active">Spring Boot</a>
+                    <a href="#" class="category-item">Node.js Express</a>
+                    <a href="#" class="category-item">Django</a>
+                    <a href="#" class="category-item">Laravel</a>
+                </div>
+
+                <div class="category">
+                    <h3>🎨 Frontend</h3>
+                    <a href="#" class="category-item">React</a>
+                    <a href="#" class="category-item">Vue.js</a>
+                    <a href="#" class="category-item">Angular</a>
+                    <a href="#" class="category-item">Vanilla JS</a>
+                </div>
+
+                <div class="category">
+                    <h3>🗄️ Database</h3>
+                    <a href="#" class="category-item">MySQL</a>
+                    <a href="#" class="category-item">PostgreSQL</a>
+                    <a href="#" class="category-item">MongoDB</a>
+                    <a href="#" class="category-item">H2 Database</a>
+                </div>
+
+                <div class="category">
+                    <h3>🔧 Extras</h3>
+                    <a href="#" class="category-item">Docker</a>
+                    <a href="#" class="category-item">JWT Auth</a>
+                    <a href="#" class="category-item">API Documentation</a>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h2 style="margin-bottom: 25px;">🍃 Plantillas Spring Boot</h2>
+                
+                <div class="templates-grid">
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-title">Controller Básico</div>
+                            <div class="template-type">CRUD</div>
+                        </div>
+                        <div class="template-description">
+                            Plantilla para generar controladores REST básicos con operaciones CRUD completas.
+                        </div>
+                        <div class="template-meta">
+                            <span>📅 Actualizado: 24/07/2025</span>
+                            <span>🔥 Usado: 45 veces</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-primary">👁️ Ver</a>
+                            <a href="#" class="btn btn-warning">✏️ Editar</a>
+                            <a href="#" class="btn btn-success">📋 Copiar</a>
+                            <a href="#" class="btn btn-danger">🗑️ Eliminar</a>
+                        </div>
+                        <div class="code-preview">
+@RestController<br>
+@RequestMapping("/api/{entity}")<br>
+public class {Entity}Controller {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Autowired<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private {Entity}Service service;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// CRUD methods...<br>
+}
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-title">JPA Entity</div>
+                            <div class="template-type">MODEL</div>
+                        </div>
+                        <div class="template-description">
+                            Plantilla para crear entidades JPA con anotaciones básicas y relaciones.
+                        </div>
+                        <div class="template-meta">
+                            <span>📅 Actualizado: 23/07/2025</span>
+                            <span>🔥 Usado: 38 veces</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-primary">👁️ Ver</a>
+                            <a href="#" class="btn btn-warning">✏️ Editar</a>
+                            <a href="#" class="btn btn-success">📋 Copiar</a>
+                            <a href="#" class="btn btn-danger">🗑️ Eliminar</a>
+                        </div>
+                        <div class="code-preview">
+@Entity<br>
+public class {Entity} {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@GeneratedValue(strategy = GenerationType.IDENTITY)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private Long id;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// fields, getters, setters...<br>
+}
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-title">Service Layer</div>
+                            <div class="template-type">SERVICE</div>
+                        </div>
+                        <div class="template-description">
+                            Capa de servicio con lógica de negocio y manejo de transacciones.
+                        </div>
+                        <div class="template-meta">
+                            <span>📅 Actualizado: 22/07/2025</span>
+                            <span>🔥 Usado: 29 veces</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-primary">👁️ Ver</a>
+                            <a href="#" class="btn btn-warning">✏️ Editar</a>
+                            <a href="#" class="btn btn-success">📋 Copiar</a>
+                            <a href="#" class="btn btn-danger">🗑️ Eliminar</a>
+                        </div>
+                        <div class="code-preview">
+@Service<br>
+@Transactional<br>
+public class {Entity}Service {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Autowired<br>
+&nbsp;&nbsp;&nbsp;&nbsp;private {Entity}Repository repository;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// business logic...<br>
+}
+                        </div>
+                    </div>
+
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="template-title">Security Config</div>
+                            <div class="template-type">SECURITY</div>
+                        </div>
+                        <div class="template-description">
+                            Configuración de Spring Security con JWT y roles básicos.
+                        </div>
+                        <div class="template-meta">
+                            <span>📅 Actualizado: 24/07/2025</span>
+                            <span>🔥 Usado: 15 veces</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="#" class="btn btn-primary">👁️ Ver</a>
+                            <a href="#" class="btn btn-warning">✏️ Editar</a>
+                            <a href="#" class="btn btn-success">📋 Copiar</a>
+                            <a href="#" class="btn btn-danger">🗑️ Eliminar</a>
+                        </div>
+                        <div class="code-preview">
+@Configuration<br>
+@EnableWebSecurity<br>
+public class SecurityConfig {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public SecurityFilterChain filterChain(HttpSecurity http) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// security config...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

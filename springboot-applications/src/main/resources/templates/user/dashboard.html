@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamWire - Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; color: white; margin-bottom: 40px; }
+        .header h1 { font-size: 3rem; margin-bottom: 10px; }
+        .header p { font-size: 1.2rem; opacity: 0.9; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+        .card:hover { transform: translateY(-5px); }
+        .card-icon { font-size: 3rem; margin-bottom: 20px; }
+        .card h3 { color: #333; margin-bottom: 15px; font-size: 1.5rem; }
+        .card p { color: #666; margin-bottom: 20px; line-height: 1.6; }
+        .btn { display: inline-block; padding: 12px 25px; background: linear-gradient(45deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; transition: all 0.3s ease; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .stats { display: flex; justify-content: space-around; margin: 40px 0; }
+        .stat { text-align: center; color: white; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; }
+        .stat-label { opacity: 0.9; }
+        .navbar { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 50px; padding: 10px 20px; margin-bottom: 20px; }
+        .navbar a { color: white; text-decoration: none; margin: 0 15px; padding: 8px 16px; border-radius: 20px; transition: background 0.3s ease; }
+        .navbar a:hover { background: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/generator">🛠️ Generador</a>
+            <a href="/project-history">📂 Proyectos</a>
+            <a href="/templates-manager">📋 Plantillas</a>
+            <a href="/logout">🚪 Salir</a>
+        </nav>
+
+        <div class="header">
+            <h1>🚀 DreamWire</h1>
+            <p>Tu idea se convierte en app con IA guiada</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Proyectos Generados</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Plantillas Activas</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Usuarios Activos</div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-icon">🛠️</div>
+                <h3>Generar Proyecto</h3>
+                <p>Describe tu idea y obtén un proyecto completo con Spring Boot + React listo para usar.</p>
+                <a href="/generator" class="btn">Empezar Generación</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📂</div>
+                <h3>Mis Proyectos</h3>
+                <p>Revisa todos los proyectos que has generado, descarga nuevamente o crea variaciones.</p>
+                <a href="/project-history" class="btn">Ver Proyectos</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Gestionar Plantillas</h3>
+                <p>Administra las plantillas de código, crea nuevas o modifica las existentes.</p>
+                <a href="/templates-manager" class="btn">Gestionar</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <h3>Usuarios</h3>
+                <p>Administra los usuarios del sistema, roles y permisos.</p>
+                <a href="/users-manager" class="btn">Administrar</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

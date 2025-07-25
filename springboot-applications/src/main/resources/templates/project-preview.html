@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamWire - Vista Previa del Proyecto</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header { background: white; border-radius: 10px; padding: 30px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .preview-grid { display: grid; grid-template-columns: 1fr 400px; gap: 30px; }
+        .code-structure { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .project-info { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .folder-tree { font-family: 'Courier New', monospace; line-height: 1.6; }
+        .folder { color: #3498db; font-weight: bold; }
+        .file { color: #2ecc71; margin-left: 20px; }
+        .btn { display: inline-block; padding: 12px 25px; margin: 10px 5px; color: white; text-decoration: none; border-radius: 8px; transition: all 0.3s ease; }
+        .btn-primary { background: #3498db; }
+        .btn-success { background: #2ecc71; }
+        .btn-secondary { background: #95a5a6; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .feature-list { list-style: none; }
+        .feature-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .feature-list li:before { content: "✅ "; color: #2ecc71; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Vista Previa del Proyecto</h1>
+            <p><strong>Proyecto:</strong> Sistema de Reservas de Yoga</p>
+            <p><strong>Generado:</strong> 24/07/2025 11:30 AM</p>
+        </div>
+
+        <div class="preview-grid">
+            <div class="code-structure">
+                <h2>🗂️ Estructura del Proyecto</h2>
+                <div class="folder-tree">
+                    <div class="folder">📁 yoga-reservas/</div>
+                    <div class="folder">├── 📁 backend/</div>
+                    <div class="file">│   ├── 📁 src/main/java/com/yogareservas/</div>
+                    <div class="file">│   │   ├── 📁 controllers/</div>
+                    <div class="file">│   │   │   ├── 🍃 UsuarioController.java</div>
+                    <div class="file">│   │   │   ├── 🍃 ClaseController.java</div>
+                    <div class="file">│   │   │   └── 🍃 ReservaController.java</div>
+                    <div class="file">│   │   ├── 📁 models/</div>
+                    <div class="file">│   │   │   ├── 🍃 Usuario.java</div>
+                    <div class="file">│   │   │   ├── 🍃 Clase.java</div>
+                    <div class="file">│   │   │   └── 🍃 Reserva.java</div>
+                    <div class="file">│   │   ├── 📁 services/</div>
+                    <div class="file">│   │   └── 📁 repositories/</div>
+                    <div class="file">│   ├── 📄 application.properties</div>
+                    <div class="file">│   └── 📄 pom.xml</div>
+                    <div class="folder">├── 📁 frontend/</div>
+                    <div class="file">│   ├── 📁 src/components/</div>
+                    <div class="file">│   │   ├── ⚛️ UserList.jsx</div>
+                    <div class="file">│   │   ├── ⚛️ ClassSchedule.jsx</div>
+                    <div class="file">│   │   └── ⚛️ BookingForm.jsx</div>
+                    <div class="file">│   ├── 📄 package.json</div>
+                    <div class="file">│   └── 📄 App.js</div>
+                    <div class="file">├── 📄 docker-compose.yml</div>
+                    <div class="file">└── 📄 README.md</div>
+                </div>
+            </div>
+
+            <div class="project-info">
+                <h2>ℹ️ Información del Proyecto</h2>
+                
+                <h3>🔧 Tecnologías incluidas:</h3>
+                <ul class="feature-list">
+                    <li>Spring Boot 3.5.3</li>
+                    <li>React 18</li>
+                    <li>MySQL Database</li>
+                    <li>Spring Security</li>
+                    <li>JWT Authentication</li>
+                    <li>Docker Compose</li>
+                </ul>
+
+                <h3>⚡ Funcionalidades:</h3>
+                <ul class="feature-list">
+                    <li>CRUD Usuarios</li>
+                    <li>Gestión de Clases</li>
+                    <li>Sistema de Reservas</li>
+                    <li>Autenticación JWT</li>
+                    <li>Panel Administrativo</li>
+                </ul>
+
+                <h3>🌐 Endpoints generados:</h3>
+                <ul class="feature-list">
+                    <li>GET /api/usuarios</li>
+                    <li>POST /api/clases</li>
+                    <li>PUT /api/reservas/{id}</li>
+                    <li>DELETE /api/usuarios/{id}</li>
+                </ul>
+
+                <div style="margin-top: 30px;">
+                    <a href="#" class="btn btn-success">📥 Descargar ZIP</a>
+                    <a href="/generator" class="btn btn-secondary">🔄 Modificar</a>
+                    <a href="/dashboard" class="btn btn-primary">🏠 Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

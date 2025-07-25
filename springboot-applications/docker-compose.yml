@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: dreamwire-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: dreamwire_db
+      MYSQL_USER: dreamuser
+      MYSQL_PASSWORD: dreampass
+      MYSQL_ROOT_PASSWORD: rootpass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - dreamwire-net
+
+volumes:
+  mysql_data:
+
+networks:
+  dreamwire-net:
