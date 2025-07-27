@@ -1,69 +1,62 @@
 package com.informationconfig.spring.app.springboot_applications.controllers;
 
+import com.informationconfig.spring.app.springboot_applications.models.Usuario;
+import com.informationconfig.spring.app.springboot_applications.models.Rol;
+import com.informationconfig.spring.app.springboot_applications.repositories.UsuarioRepository;
+import com.informationconfig.spring.app.springboot_applications.dto.LoginRequest;
+import com.informationconfig.spring.app.springboot_applications.dto.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
-import com.informationconfig.spring.app.springboot_applications.models.User;
-import com.informationconfig.spring.app.springboot_applications.dto.LoginRequest;
-import com.informationconfig.spring.app.springboot_applications.dto.RegisterRequest;
-import com.informationconfig.spring.app.springboot_applications.repository.UserRepository;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        // Verificar si el usuario ya existe
-        if (userRepository.existsByEmail(request.getEmail())) {
-            return ResponseEntity.badRequest().body(Map.of("error", "El usuario ya existe"));
+        // Check if username already exists
+        if (usuarioRepository.findByUsername(request.getName()).isPresent()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "User already exists"));
         }
 
-        // Crear nuevo usuario
-        User newUser = new User();
-        newUser.setName(request.getName());
-        newUser.setEmail(request.getEmail());
-        newUser.setPassword(request.getPassword());
-        newUser.setRole("USER");
-        
-        // Guardar en base de datos
-        User savedUser = userRepository.save(newUser);
+        Usuario usuario = new Usuario();
+        usuario.setUsername(request.getName());
+        usuario.setEmail(request.getEmail());
+        usuario.setPassword(request.getPassword()); // TODO: Hash password in production
+        usuario.setRoles(Set.of(Rol.USER));
 
-        // Devolver usuario sin contraseña
+        Usuario saved = usuarioRepository.save(usuario);
+
         Map<String, Object> response = new HashMap<>();
-        response.put("id", savedUser.getId());
-        response.put("name", savedUser.getName());
-        response.put("email", savedUser.getEmail());
-        response.put("role", savedUser.getRole());
-        response.put("token", "dummy-jwt-token-" + savedUser.getId());
+        response.put("id", saved.getId());
+        response.put("username", saved.getUsername());
+        response.put("email", saved.getEmail());
+        response.put("roles", saved.getRoles());
+        response.put("token", "dummy-jwt-token-" + saved.getId());
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
-
-        if (userOptional.isEmpty() || !userOptional.get().getPassword().equals(request.getPassword())) {
-            return ResponseEntity.status(401).body(Map.of("error", "Credenciales inválidas"));
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(request.getEmail());
+        if (usuarioOpt.isEmpty() || !usuarioOpt.get().getPassword().equals(request.getPassword())) {
+            return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
         }
 
-        User user = userOptional.get();
-        
-        // Devolver usuario sin contraseña
+        Usuario usuario = usuarioOpt.get();
         Map<String, Object> response = new HashMap<>();
-        response.put("id", user.getId());
-        response.put("name", user.getName());
-        response.put("email", user.getEmail());
-        response.put("role", user.getRole());
-        response.put("token", "dummy-jwt-token-" + user.getId());
+        response.put("id", usuario.getId());
+        response.put("username", usuario.getUsername());
+        response.put("email", usuario.getEmail());
+        response.put("roles", usuario.getRoles());
+        response.put("token", "dummy-jwt-token-" + usuario.getId());
 
         return ResponseEntity.ok(response);
     }

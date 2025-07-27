@@ -134,8 +134,8 @@ public class DashboardController {
     public ResponseEntity<Map<String, Object>> getUserDashboard(@RequestHeader("Authorization") String token) {
         if (!isValidToken(token)) {
             Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("error", "Token inválido");
-            return ResponseEntity.status(401).body(errorResponse);
+        errorResponse.put("error", "Token inválido");
+        return ResponseEntity.status(401).body(errorResponse);
         }
 
         Map<String, Object> user = getUserFromToken(token);
