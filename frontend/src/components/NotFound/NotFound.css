@@ -1,0 +1,69 @@
+.not-found-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  padding: 1rem;
+}
+
+.not-found-card {
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 6px rgba(138, 43, 226, 0.1);
+  padding: 3rem;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+}
+
+.not-found-title {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #8A2BE2;
+  margin: 0;
+  line-height: 1;
+}
+
+.not-found-card h2 {
+  font-size: 2rem;
+  color: #495057;
+  margin: 1rem 0;
+}
+
+.not-found-card p {
+  color: #6c757d;
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.not-found-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background-color: #8A2BE2;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.not-found-button:hover {
+  background-color: #6A1B9A;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .not-found-title {
+    font-size: 4rem;
+  }
+
+  .not-found-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .not-found-card {
+    padding: 2rem;
+  }
+}
