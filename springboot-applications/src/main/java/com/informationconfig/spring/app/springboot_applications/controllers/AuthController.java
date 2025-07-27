@@ -1,62 +1,69 @@
 package com.informationconfig.spring.app.springboot_applications.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.informationconfig.spring.app.springboot_applications.models.User;
 import com.informationconfig.spring.app.springboot_applications.dto.LoginRequest;
 import com.informationconfig.spring.app.springboot_applications.dto.RegisterRequest;
+import com.informationconfig.spring.app.springboot_applications.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final Map<String, User> users = new HashMap<>();
-    private Long nextUserId = 1L;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        // Validar si el email ya existe
-        if (users.values().stream().anyMatch(u -> u.getEmail().equals(request.getEmail()))) {
-            return ResponseEntity.badRequest().body(Map.of("error", "El email ya está registrado"));
+        // Verificar si el usuario ya existe
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.badRequest().body(Map.of("error", "El usuario ya existe"));
         }
 
         // Crear nuevo usuario
         User newUser = new User();
-        newUser.setId(nextUserId++);
         newUser.setName(request.getName());
         newUser.setEmail(request.getEmail());
-        newUser.setPassword(request.getPassword()); // En producción, hashear la contraseña
+        newUser.setPassword(request.getPassword());
         newUser.setRole("USER");
-
-        users.put(request.getEmail(), newUser);
+        
+        // Guardar en base de datos
+        User savedUser = userRepository.save(newUser);
 
         // Devolver usuario sin contraseña
         Map<String, Object> response = new HashMap<>();
-        response.put("id", newUser.getId());
-        response.put("name", newUser.getName());
-        response.put("email", newUser.getEmail());
-        response.put("role", newUser.getRole());
+        response.put("id", savedUser.getId());
+        response.put("name", savedUser.getName());
+        response.put("email", savedUser.getEmail());
+        response.put("role", savedUser.getRole());
+        response.put("token", "dummy-jwt-token-" + savedUser.getId());
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        User user = users.get(request.getEmail());
+        Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
 
-        if (user == null || !user.getPassword().equals(request.getPassword())) {
+        if (userOptional.isEmpty() || !userOptional.get().getPassword().equals(request.getPassword())) {
             return ResponseEntity.status(401).body(Map.of("error", "Credenciales inválidas"));
         }
 
+        User user = userOptional.get();
+        
         // Devolver usuario sin contraseña
         Map<String, Object> response = new HashMap<>();
         response.put("id", user.getId());
         response.put("name", user.getName());
         response.put("email", user.getEmail());
         response.put("role", user.getRole());
+        response.put("token", "dummy-jwt-token-" + user.getId());
 
         return ResponseEntity.ok(response);
     }
